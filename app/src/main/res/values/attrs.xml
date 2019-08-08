@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PersianDatePicker">
+        <attr name="minYear" format="integer"/>
+        <attr name="maxYear" format="integer"/>
+        <attr name="selectedYear" format="integer"/>
+        <attr name="selectedMonth" format="integer"/>
+        <attr name="selectedDay" format="integer"/>
+        <attr name="displayMonthNames" format="boolean"/>
+        <attr name="yearRange" format="integer"/>
+        <attr name="displayDiscription" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="SwipeRevealLayout">
+        <attr name="dragFromEdge">
+            <flag name="left" value="1" />
+            <flag name="right" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

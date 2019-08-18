@@ -20,10 +20,12 @@ import com.androidnetworking.error.ANError;
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import ir.drax.smartrider.data.DataManager;
 import ir.drax.smartrider.data.network.model.GoogleDirectionResponse;
 import ir.drax.smartrider.data.network.model.LogoutResponse;
+import ir.drax.smartrider.data.network.model.mapir.MapirDirectionResponse;
 import ir.drax.smartrider.ui.base.BasePresenter;
 import ir.drax.smartrider.utils.network.rx.SchedulerProvider;
 
@@ -107,11 +109,22 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V>
         //initialize views
         getCompositeDisposable().add(getDataManager()
                 .getGoogleWaypointsApiCall(params)
-                .subscribe(new Consumer<GoogleDirectionResponse>() {
-                    @Override
-                    public void accept(GoogleDirectionResponse googleDirectionResponse) throws Exception {
-                        getMvpView().setGoogleWaypoints(googleDirectionResponse);
-                    }
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(googleDirectionResponse -> getMvpView().setGoogleWaypoints(googleDirectionResponse)));
+    }
+
+    @Override
+    public void getMapirDirection(String params) {
+        //initialize views
+        getCompositeDisposable().add(getDataManager()
+                .getMapirWaypointsApiCall(params)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(mapirDirectionResponse -> {
+                    getMvpView().setMapirWaypoints(mapirDirectionResponse);
+                }, throwable ->{
+                    getMvpView().failed(throwable.getMessage());
                 }));
     }
 

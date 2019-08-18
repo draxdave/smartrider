@@ -21,6 +21,9 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.material.navigation.NavigationView;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
@@ -43,11 +46,12 @@ import butterknife.ButterKnife;
 import ir.drax.smartrider.BuildConfig;
 import ir.drax.smartrider.R;
 import ir.drax.smartrider.data.network.model.GoogleDirectionResponse;
+import ir.drax.smartrider.data.network.model.mapir.MapirDirectionResponse;
 import ir.drax.smartrider.ui.base.BaseActivity;
 import ir.drax.smartrider.ui.login.LoginActivity;
 import ir.drax.smartrider.ui.main.navigation.GoogleNavigation;
-import ir.drax.smartrider.ui.main.navigation.A2F_NavigationInteraction;
-import ir.drax.smartrider.ui.main.navigation.F2A_NavigationInteraction;
+import ir.drax.smartrider.ui.main.navigation.interfaces.A2F_NavigationInteraction;
+import ir.drax.smartrider.ui.main.navigation.interfaces.F2A_NavigationInteraction;
 import ir.drax.smartrider.utils.view.RoundedImageView;
 
 /**
@@ -154,6 +158,10 @@ public class MainActivity extends BaseActivity implements MainMvpView , F2A_Navi
         super.onResume();
         if (mDrawer != null)
             mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+
+        if (!checkPlayServices()) {
+            showMessage("You need to install Google Play Services to use the App properly");
+        }
     }
 
     @Override
@@ -196,6 +204,11 @@ public class MainActivity extends BaseActivity implements MainMvpView , F2A_Navi
     @Override
     public void setGoogleWaypoints(GoogleDirectionResponse googleDirectionResponse) {
         a2FNavigationInteraction.setGoogleWaypoints(googleDirectionResponse);
+    }
+
+    @Override
+    public void setMapirWaypoints(MapirDirectionResponse mapirDirectionResponse) {
+        a2FNavigationInteraction.setMapirWaypoints(mapirDirectionResponse);
     }
 
     @Override
@@ -302,6 +315,33 @@ public class MainActivity extends BaseActivity implements MainMvpView , F2A_Navi
 
     @Override
     public void getGoogleDirection(String params) {
+        mPresenter.getGoogleDirection(params);
+    }
 
+    @Override
+    public void getMapirDirection(String mapirApiParams) {
+        mPresenter.getMapirDirection(mapirApiParams);
+    }
+
+    @Override
+    public void failed(String message) {
+        a2FNavigationInteraction.onError(message);
+    }
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, 101);
+            } else {
+                finish();
+            }
+
+            return false;
+        }
+
+        return true;
     }
 }
+

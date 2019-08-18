@@ -18,6 +18,7 @@
     <!--Design colors-->
     <color name="red_dark">#F06423</color>
     <color name="red_dark2">#D85A1B</color>
+    <color name="red_dark3">#FF9800</color>
     <color name="cyan_light">#c9ebee</color>
     <color name="cyan">#b5e3e7</color>
     <color name="cyan_dark">#70BDC6</color>

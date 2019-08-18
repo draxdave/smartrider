@@ -42,6 +42,7 @@ public final class ApiEndPoint {
             + "/5926c34212000035026871cd";
 
     public static final String ENDPOINT_GOOGLE_DIRECTIONS ="https://maps.googleapis.com/maps/api/directions/json?";
+    public static final String ENDPOINT_MAPIR_DIRECTIONS ="https://map.ir/routes/route/v1/driving/";
 
     private ApiEndPoint() {
         // This class is not publicly instantiable

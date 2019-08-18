@@ -27,6 +27,7 @@ import ir.drax.smartrider.data.network.model.LoginRequest;
 import ir.drax.smartrider.data.network.model.LoginResponse;
 import ir.drax.smartrider.data.network.model.LogoutResponse;
 import ir.drax.smartrider.data.network.model.OpenSourceResponse;
+import ir.drax.smartrider.data.network.model.mapir.MapirDirectionResponse;
 
 /**
  * Created by janisharali on 28/01/17.
@@ -103,10 +104,20 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Single<GoogleDirectionResponse> getGoogleWaypointsApiCall(String params) {
+
+
         return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_GOOGLE_DIRECTIONS+params)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectSingle(GoogleDirectionResponse.class);
+    }
+
+    @Override
+    public Single<MapirDirectionResponse> getMapirWaypointsApiCall(String params) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_MAPIR_DIRECTIONS+params)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(MapirDirectionResponse.class);
     }
 }
 

@@ -30,33 +30,30 @@
 
         <ImageView
             android:layout_centerInParent="true"
-            android:id="@+id/sourcePoint"
-            map:srcCompat="@drawable/ic_source"
+            android:id="@+id/destinationView"
+            map:srcCompat="@drawable/ic_destination"
             android:alpha="0"
             android:scaleType="fitStart"
             android:layout_height="100dp"
             android:layout_width="50dp"
             />
 
-        <ImageView
-            android:layout_centerInParent="true"
-            android:id="@+id/destPoint"
-            android:visibility="gone"
-            map:srcCompat="@drawable/ic_destination"
-            android:layout_width="50dp"
-            android:scaleType="fitStart"
-            android:layout_height="100dp" />
-
         <TextView
             android:id="@+id/request"
-            android:alpha="0"
-            android:gravity="center"
-            android:background="@color/dark_gray"
-            android:textColor="@color/colorPrimary"
+            android:gravity="top|center_horizontal"
+            android:paddingTop="32dp"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_route_summary"
+            android:layout_marginBottom="-100dp"
+            android:elevation="14dp"
+            android:background="@drawable/letsgo_btn_bg"
+            android:textColor="@color/white"
+            android:text="بزن بریم!"
+            android:textStyle="bold"
             android:layout_alignParentBottom="true"
-            android:text="درخواست سفر"
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_centerHorizontal="true"
+            android:layout_width="200dp"
+            android:layout_height="200dp" />
 
         <TextView
             android:textColor="@color/dark_gray"

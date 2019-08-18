@@ -45,6 +45,7 @@ import ir.drax.smartrider.data.network.model.LoginRequest;
 import ir.drax.smartrider.data.network.model.LoginResponse;
 import ir.drax.smartrider.data.network.model.LogoutResponse;
 import ir.drax.smartrider.data.network.model.OpenSourceResponse;
+import ir.drax.smartrider.data.network.model.mapir.MapirDirectionResponse;
 import ir.drax.smartrider.data.prefs.PreferencesHelper;
 import ir.drax.smartrider.di.ApplicationContext;
 import ir.drax.smartrider.utils.AppConstants;
@@ -312,6 +313,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<GoogleDirectionResponse> getGoogleWaypointsApiCall(String params) {
         return mApiHelper.getGoogleWaypointsApiCall(params);
+    }
+
+    @Override
+    public Single<MapirDirectionResponse> getMapirWaypointsApiCall(String params) {
+        return mApiHelper.getMapirWaypointsApiCall(params);
     }
 
 

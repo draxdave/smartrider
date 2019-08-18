@@ -16,6 +16,7 @@
 package ir.drax.smartrider.ui.main;
 
 import ir.drax.smartrider.data.network.model.GoogleDirectionResponse;
+import ir.drax.smartrider.data.network.model.mapir.MapirDirectionResponse;
 import ir.drax.smartrider.ui.base.MvpView;
 
 /**
@@ -41,4 +42,8 @@ public interface MainMvpView extends MvpView {
     void unlockDrawer();
 
     void setGoogleWaypoints(GoogleDirectionResponse googleDirectionResponse);
+
+    void setMapirWaypoints(MapirDirectionResponse mapirDirectionResponse);
+
+    void failed(String message);
 }

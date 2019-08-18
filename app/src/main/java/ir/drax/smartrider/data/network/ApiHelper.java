@@ -22,6 +22,7 @@ import ir.drax.smartrider.data.network.model.LoginRequest;
 import ir.drax.smartrider.data.network.model.LoginResponse;
 import ir.drax.smartrider.data.network.model.LogoutResponse;
 import ir.drax.smartrider.data.network.model.OpenSourceResponse;
+import ir.drax.smartrider.data.network.model.mapir.MapirDirectionResponse;
 
 /**
  * Created by janisharali on 27/01/17.
@@ -43,4 +44,6 @@ public interface ApiHelper {
 
     Single<OpenSourceResponse> getOpenSourceApiCall();
     Single<GoogleDirectionResponse> getGoogleWaypointsApiCall(String params);
+
+    Single<MapirDirectionResponse> getMapirWaypointsApiCall(String params);
 }

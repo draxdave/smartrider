@@ -26,8 +26,8 @@ public final class AppConstants {
 
     public static final int API_STATUS_CODE_LOCAL_ERROR = 0;
 
-    public static final String DB_NAME = "drax_bordito.db";
-    public static final String PREF_NAME = "drax_bordito_pref";
+    public static final String DB_NAME = "drax_smartrider.db";
+    public static final String PREF_NAME = "drax_smartrider_pref";
 
     public static final long NULL_INDEX = -1L;
 

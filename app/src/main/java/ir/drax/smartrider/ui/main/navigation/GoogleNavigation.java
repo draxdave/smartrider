@@ -208,7 +208,7 @@ public class GoogleNavigation extends BaseFragment implements OnMapReadyCallback
             if (distanceLat<0)distanceLat=distanceLat*-1;
             if (distanceLng<0)distanceLng=distanceLng*-1;
 
-            if (distanceLat<= .0000001 && distanceLng<= .0000001 ){
+            if (distanceLat < 1.397106078755428E-4 && distanceLng < 1.397106078755428E-4 ){
                 CameraPosition.Builder position = new CameraPosition.Builder(mMap.getCameraPosition());
                 if (mMap.getCameraPosition().zoom>Zoom.Normal)
                     position.zoom(Zoom.Normal);
@@ -252,9 +252,12 @@ public class GoogleNavigation extends BaseFragment implements OnMapReadyCallback
                     //Display speed
                     //move camera
                     //navigateNextStep();
+                    /*CameraFollow(new LatLng(line.getPoints().get(launcher.getNavStep()).latitude,line.getPoints().get(launcher.getNavStep()).longitude)
+                            , new LatLng(line.getPoints().get(launcher.getNavStep()+1).latitude,line.getPoints().get(launcher.getNavStep()+1).longitude));*/
+                    CameraFollow(new LatLng(myLocation.getLatitude(), myLocation.getLongitude())
+                            , new LatLng(newLocation.getLatitude(), newLocation.getLongitude()));
+
                     myLocation = newLocation;
-                    CameraFollow(new LatLng(line.getPoints().get(launcher.getNavStep()).latitude,line.getPoints().get(launcher.getNavStep()).longitude)
-                            , new LatLng(line.getPoints().get(launcher.getNavStep()+1).latitude,line.getPoints().get(launcher.getNavStep()+1).longitude));
 
                 }else if (!locationDetected) {
                     myLocation = newLocation;
@@ -264,7 +267,7 @@ public class GoogleNavigation extends BaseFragment implements OnMapReadyCallback
                     launcher.setState(NavigateModel.STATE_NONE);
                     hideLoading();
                     myMarker=mMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(35.787925, 51.337730))
+                            .position(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()))
                             //.zIndex(12)
                             .rotation(newLocation.getBearing())
                             .icon(ImageUtil.bitmapDescriptorFromVector(getContext(),R.drawable.ic_navigation_img))
@@ -276,7 +279,7 @@ public class GoogleNavigation extends BaseFragment implements OnMapReadyCallback
 
                     //myMarker.setPosition(new LatLng( newLocation.getLatitude(),newLocation.getLongitude()));*/
 
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng( newLocation.getLatitude(),newLocation.getLongitude()), Zoom.Normal));
+                   // mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng( newLocation.getLatitude(),newLocation.getLongitude()), Zoom.Normal));
                 }
 
                 myLocation = newLocation;
